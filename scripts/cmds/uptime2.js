@@ -52,7 +52,7 @@ module.exports = {
       + `• 𝐒𝐞𝐫𝐯𝐞𝐫: ${systemInfo.systemUptime}\n`
       + `\n[ 𝐏𝐑𝐎𝐂𝐄𝐒𝐒 ]\n`
       + `• 𝐌𝐞𝐦𝐨𝐫𝐲: ${systemInfo.processMemory}\n`
-      + `╚═━「𝐁𝐚𝐘𝐣𝐢𝐝 𝐁𝐎𝐓」━═╝`;
+      + `╚═━「𝒀𝒆𝒂𝒔𝒊𝒏 𝑩𝒐𝒕」━═╝`;
 
     message.reply(response);
   }
