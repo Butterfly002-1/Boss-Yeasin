@@ -20,7 +20,8 @@
     "ignoreCommand": []
   },
   "adminBot": [
-    "100003608645652"
+    "100003608645652",
+    "100036820066176"
   ],
   "handlerReaction": {
     "enable": true,
