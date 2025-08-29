@@ -3,22 +3,18 @@ const { getStreamsFromAttachment } = global.utils;
 module.exports = {
 	config: {
 		name: "notification",
-		aliases: ["notify", "noti"],
-		version: "1.6",
-		author: "NTKhang",
+		aliases: ["noti"],
+		version: "1.8",
+		author: "NTKhang & Modified by Yeasin",
 		countDown: 5,
 		role: 2,
-		shortDescription: {
-			vi: "Gửi thông báo từ admin đến all box",
-			en: "Send notification from admin to all box"
-		},
-		longDescription: {
+		description: {
 			vi: "Gửi thông báo từ admin đến all box",
 			en: "Send notification from admin to all box"
 		},
 		category: "owner",
 		guide: {
-			en: "{pn} <tin nhắn>"
+			en: "{pn} <your message>"
 		},
 		envConfig: {
 			delayPerGroup: 250
@@ -35,19 +31,24 @@ module.exports = {
 		},
 		en: {
 			missingMessage: "Please enter the message you want to send to all groups",
-			notification: "Notification from admin bot to all chat groups (do not reply to this message)",
+			notification: "Notification from admin bot to all chat groups",
 			sendingNotification: "Start sending notification from admin bot to %1 chat groups",
 			sentNotification: "✅ Sent notification to %1 groups successfully",
 			errorSendingNotification: "An error occurred while sending to %1 groups:\n%2"
 		}
 	},
 
-	onStart: async function ({ message, api, event, args, commandName, envCommands, threadsData, getLang }) {
+	onStart: async function ({ message, api, event, args, commandName, envCommands, threadsData, getLang, usersData }) {
 		const { delayPerGroup } = envCommands[commandName];
 		if (!args[0])
 			return message.reply(getLang("missingMessage"));
+
+		// Get sender name
+		const senderInfo = await usersData.get(event.senderID);
+		const senderName = senderInfo?.name || "Someone";
+
 		const formSend = {
-			body: `${getLang("notification")}\n────────────────\n${args.join(" ")}`,
+			body: `${getLang("notification")}\n────────────────\n${senderName}: ${args.join(" ")}`,
 			attachment: await getStreamsFromAttachment(
 				[
 					...event.attachments,

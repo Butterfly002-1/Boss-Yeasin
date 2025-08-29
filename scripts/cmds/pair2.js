@@ -3,8 +3,7 @@ const fs = require("fs-extra");
 module.exports = {
  config: {
  name: "pair2",
- author: " BaYjid",
- countDown: 5,
+ countDown: 10,
  role: 0,
  shortDescription: {
  en: "Get to know your partner",
@@ -22,7 +21,7 @@ const { loadImage, createCanvas } = require("canvas");
  let pathImg = __dirname + "/assets/background.png";
  let pathAvt1 = __dirname + "/assets/any.png";
  let pathAvt2 = __dirname + "/assets/avatar.png";
-
+ 
  var id1 = event.senderID;
  var name1 = await usersData.getName(id1);
  var ThreadInfo = await api.getThreadInfo(event.threadID);
@@ -57,13 +56,13 @@ const { loadImage, createCanvas } = require("canvas");
  var cc = ["0", "-1", "99,99", "-99", "-100", "101", "0,01"];
  var rd2 = cc[Math.floor(Math.random() * cc.length)];
  var djtme = [`${rd1}`, `${rd1}`, `${rd1}`, `${rd1}`, `${rd1}`, `${rd2}`, `${rd1}`, `${rd1}`, `${rd1}`, `${rd1}`];
-
+ 
  var tile = djtme[Math.floor(Math.random() * djtme.length)];
 
  var background = [
  "https://i.ibb.co/RBRLmRt/Pics-Art-05-14-10-47-00.jpg"
  ];
-
+ 
  let getAvtmot = (
  await axios.get( `https://graph.facebook.com/${id1}/picture?width=720&height=720&access_token=6628568379%7Cc1e620fa708a1d5696fb991c1bde5662`,
  { responseType: "arraybuffer" }
@@ -97,7 +96,7 @@ const { loadImage, createCanvas } = require("canvas");
  fs.writeFileSync(pathImg, imageBuffer);
  fs.removeSync(pathAvt1);
  fs.removeSync(pathAvt2);
- return api.sendMessage({ body: `『💗』Congratulations ${name1}『💗』\『❤️』Looks like your destiny brought you together with ${name2}『❤️』\『🔗』Your link percentage is ${tile}%『🔗』`,
+ return api.sendMessage({ body: `『💗』Congratulations ${name1}『💗』\『❤』Looks like your destiny brought you together with ${name2}『❤』\『🔗』Your link percentage is ${tile}%『🔗』`,
  mentions: [{
  tag: `${name2}`,
  id: id2
@@ -105,6 +104,5 @@ const { loadImage, createCanvas } = require("canvas");
  event.threadID,
  () => fs.unlinkSync(pathImg),
  event.messageID);
- }
-
 }
+    }
