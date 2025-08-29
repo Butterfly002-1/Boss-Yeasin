@@ -111,7 +111,7 @@ module.exports = {
 			}
 
         case "on": {              
-   config.whiteListMode.enable = true;
+   config.whiteListMode.enable = false;
              writeFileSync(global.client.dirConfig, JSON.stringify(config, null, 2));
                 return message.reply(getLang("enable"))
             }
