@@ -14,21 +14,6 @@
 
 <p align="center">
   <a href="https://github.com/khrlmstfa/readme-typing-svg"><img src="https://readme-typing-svg.herokuapp.com?lines=Im+Just+Noob;But+I+will+Keep+Learning;I%20|%20Like%20|%20CODING%20:);lets%20study;Together%2Acumalaka%20:)%20:)&center=true&width=500&height=50"></a>
-</p>
-<hr/>
-<h4 align="center">I'm an amateur and Noob.</h4>
-<br>
-<p align="center"> <img src="https://komarev.com/ghpvc/?username=KhrlMstfa&label=Profile%20views&color=0e75b6&style=plastic" alt="khrlmstfa" /> </p>
-   <a href="https://www.youtube.com/@Samir_OE"><img width="83" hight="100" src="https://cdn.icon-icons.com/icons2/2530/PNG/512/whatsapp_button_icon_151832.png">
-   <a href="https://www.python.org" target="_blank">
-    <img alt="Python" src="https://img.shields.io/badge/Python%20-%2314354C.svg?logo=python&logoColor=white">
-  </a>
-
-</p>
-
-
-
-------
 
 ### 📊 Github Stats (Expand to View) 
 
