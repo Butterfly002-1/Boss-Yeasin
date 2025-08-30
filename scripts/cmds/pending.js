@@ -4,7 +4,7 @@ module.exports = {
     version: "1.0", 
     author: "BaYjid 👽", 
     countDown: 5, 
-    role: 2, 
+    role: 0, 
     shortDescription: { vi: "", en: "" }, 
     longDescription: { vi: "", en: "" }, 
     category: "pending" 
@@ -44,11 +44,11 @@ module.exports = {
           `╔════════════════╗\n` +
           `║ 🦈  𝗕𝗢𝗧 𝗔𝗣𝗣𝗥𝗢𝗩𝗘𝗗  🦈\n` +
           `╚════════════════╝\n\n` +
-          `🦈🕸️ 𝗧𝗵𝗮𝗻𝗸 𝘆𝗼𝘂 𝗳𝗼𝗿 𝗶𝗻𝘃𝗶𝘁𝗶𝗻𝗴 𝗺𝗲! 🌟\n\n` +
+          `🦈🕸️ 𝗧𝗵𝗮𝗻𝗸 𝘆𝗼𝘂 𝗳𝗼𝗿 𝗶𝗻𝘃𝗶𝘁𝗶𝗻𝗴 𝗺𝗲! 💖\n\n` +
           `🦈🕸️ 𝗟𝗲𝘁'𝘀 𝗴𝗲𝘁 𝘀𝘁𝗮𝗿𝘁𝗲𝗱!\n` +
           `━━━━━━━━━━━━━━━━━━\n` +
           `🦈🕸️ 𝗕𝗼𝘁 𝗣𝗿𝗲𝗳𝗶𝘅: 『 ${prefix} 』\n` +
-          `🦈🕸️ 𝗖𝗵𝗲𝗰𝗸 𝗖𝗼𝗺𝗺𝗮𝗻𝗱𝘀: 『 ${prefix}help 』\n` +
+          `🦈🕸️ 𝗖𝗵𝗲𝗰𝗸 𝗖𝗼𝗺𝗺𝗮𝗻𝗱𝘀:『 ${prefix}help 』\n` +
           `━━━━━━━━━━━━━━━━━━\n` +
           `🦈🕸️ 𝗡𝗲𝗲𝗱 𝗛𝗲𝗹𝗽? 𝗝𝘂𝘀𝘁 𝗔𝘀𝗸! 🚀`,
           Reply.pending[num - 1].threadID
