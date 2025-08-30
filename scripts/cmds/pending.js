@@ -45,7 +45,7 @@ module.exports = {
 
       api.sendMessage(
         {
-          body: `${global.GoatBot.config.nickNameBot} 𝐈𝐒 𝐍𝐎𝐖 𝐂𝐎𝐍𝐍𝐄𝐂𝐓𝐄𝐃!\nUse [${global.GoatBot.config.prefix}help] 𝐓𝐎 𝐒𝐄𝐄 𝐀𝐋𝐋 𝐂𝐎𝐌𝐌𝐀𝐍𝐃𝐒 🎀💖.`
+          body: `${global.GoatBot.config.nickNameBot} 𝐈𝐒 𝐍𝐎𝐖 𝐂𝐎𝐍𝐍𝐄𝐂𝐓𝐄𝐃!\nUse [ ${global.GoatBot.config.prefix}help ] 𝐓𝐎 𝐒𝐄𝐄 𝐀𝐋𝐋 𝐂𝐎𝐌𝐌𝐀𝐍𝐃𝐒 🎀💖.`
         },
         target.threadID
       );
