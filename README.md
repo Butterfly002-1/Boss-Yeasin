@@ -19,16 +19,6 @@
 <h4 align="center">I'm an amateur and Noob.</h4>
 <br>
 <p align="center"> <img src="https://komarev.com/ghpvc/?username=KhrlMstfa&label=Profile%20views&color=0e75b6&style=plastic" alt="khrlmstfa" /> </p>
-
-
-
-### 🔥 Streak Stats
-<p align="center"><img src="https://github-readme-streak-stats.herokuapp.com/?user=khrlmstfa&theme=algolia" alt="khrlmstfa"  /></p>
-
-<p align="left"> 
-
-
-   
    <a href="https://www.youtube.com/@Samir_OE"><img width="83" hight="100" src="https://cdn.icon-icons.com/icons2/2530/PNG/512/whatsapp_button_icon_151832.png">
    <a href="https://www.python.org" target="_blank">
     <img alt="Python" src="https://img.shields.io/badge/Python%20-%2314354C.svg?logo=python&logoColor=white">
