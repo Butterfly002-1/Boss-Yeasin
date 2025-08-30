@@ -11,7 +11,7 @@ module.exports = {
     longDescription: {
       en: "Join the official support group chat"
     },
-    category: "BUTTERFLY SUPPORT BOX",
+    category: "admin",
     guide: {
       en: "{pn}"
     }
