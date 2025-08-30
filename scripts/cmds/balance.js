@@ -1,97 +1,108 @@
 module.exports = {
-	config: {
-		name: "balance",
-		aliases: ["bal"],
-		version: "1.5",
-		author: "BaYjid",
-		countDown: 5,
-		role: 0,
-		description: {
-			vi: "xem số tiền hiện có của bạn hoặc người được tag, hoặc thêm tiền",
-			en: "view your money, the money of the tagged person, or add money"
-		},
-		category: "economy",
-		guide: {
-			vi: "   {pn}: xem số tiền của bạn"
-				+ "\n   {pn} <@tag>: xem số tiền của người được tag"
-				+ "\n   {pn} add <số tiền>: thêm tiền vào tài khoản của bạn"
-				+ "\n   {pn} add <số tiền> <@tag>: thêm tiền cho người được tag",
-			en: "   {pn}: view your money"
-				+ "\n   {pn} <@tag>: view the money of the tagged person"
-				+ "\n   {pn} add <amount>: add money to your account"
-				+ "\n   {pn} add <amount> <@tag>: give money to the tagged person"
-		}
-	},
+  config: {
+    name: "balance",
+    aliases: ["bal", "$", "cash"],
+    version: "3.2",
+    author: "Butterfly",
+    countDown: 3,
+    role: 0,
+    description: "💰 Premium Economy System with Stylish Display",
+    category: "economy",
+    guide: {
+      en: "╔════✦ Usage Guide ✦════╗\n"
+        + "║ ➤ {pn} - Check your balance\n"
+        + "║ ➤ {pn} @user - Check others\n"
+        + "║ ➤ {pn} t @user amount - Transfer\n"
+        + "║ ➤ {pn} [reply] - Check replied user's balance\n"
+        + "╚══════════════════════╝"
+    }
+  },
 
-	langs: {
-		vi: {
-			money: "Bạn đang có %1$",
-			moneyOf: "%1 đang có %2$",
-			addedMoney: "Đã thêm %1$ vào tài khoản của bạn. Số dư hiện tại: %2$",
-			addedMoneyTo: "Bạn đã chuyển %1$ cho %2. Số dư của bạn: %3$",
-			invalidAmount: "Số tiền không hợp lệ.",
-			notEnoughMoney: "Bạn không có đủ tiền để chuyển.",
-			limitExceeded: "Bạn chỉ có thể thêm tối đa 500$ một lần."
-		},
-		en: {
-			money: "💰 | 𝚈𝚘𝚞'𝚜 𝚆𝚊𝚕𝚕𝚎𝚝:\n━━━━━━━━━━━━━━\n💵 𝗕𝗔𝗟𝗔𝗡𝗖𝗘: %1$ \n━━━━━━━━━━━━━━\n🎉🎉🎉🎉🎉🎉🎉🎉",
-			moneyOf: "%1 has %2$",
-			addedMoney: "✅ Added %1$ to your account. New balance: %2$",
-			addedMoneyTo: "✅ You sent %1$ to %2. Your new balance: %3$",
-			invalidAmount: "❌ Invalid amount.",
-			notEnoughMoney: "❌ You don't have enough money to send.",
-			limitExceeded: "❌ You can only add a maximum of 200$ at a time."
-		}
-	},
+  onStart: async function ({ message, event, args, usersData, prefix }) {
+    const { senderID, messageReply, mentions } = event;
 
-	onStart: async function ({ message, usersData, event, args, getLang }) {
-		// Replace with the actual admin user ID
-		const adminID = "100005193854879"; 
+    const formatMoney = (amount) => {
+      if (isNaN(amount)) return "$0";
+      amount = Number(amount);
+      const scales = [
+        { value: 1e15, suffix: 'Q' },
+        { value: 1e12, suffix: 'T' },
+        { value: 1e9, suffix: 'B' },
+        { value: 1e6, suffix: 'M' },
+        { value: 1e3, suffix: 'k' }
+      ];
+      const scale = scales.find(s => amount >= s.value);
+      if (scale) {
+        const scaledValue = amount / scale.value;
+        return `$${scaledValue.toFixed(1)}${scale.suffix}`;
+      }
+      return `$${amount.toLocaleString()}`;
+    };
 
-		if (args[0] === "add") {
-			const amount = parseInt(args[1]);
-			if (isNaN(amount) || amount <= 0) return message.reply(getLang("invalidAmount"));
+    const createFlatDisplay = (title, contentLines) => {
+      return `✨ ${title} ✨\n` + 
+        contentLines.map(line => `➤ ${line}`).join('\n') + '\n';
+    };
 
-			// Check if user is an admin; if not, apply the limit
-			const isAdmin = event.senderID === adminID;
-			if (!isAdmin && amount > 200) return message.reply(getLang("limitExceeded")); // Limit amount to 200 for non-admins
+    if (args[0]?.toLowerCase() === 't') {
+      const targetID = Object.keys(mentions)[0] || messageReply?.senderID;
+      const amount = parseFloat(args[args.length - 1]);
 
-			const senderData = await usersData.get(event.senderID);
+      if (!targetID || isNaN(amount)) {
+        return message.reply(createFlatDisplay("Invalid Usage", [
+          `Use: ${prefix}balance t @user amount`
+        ]));
+      }
 
-			if (Object.keys(event.mentions).length > 0) {
-				const uid = Object.keys(event.mentions)[0];
-				const recipientData = await usersData.get(uid);
+      if (amount <= 0) return message.reply(createFlatDisplay("Error", ["Amount must be positive."]));
+      if (senderID === targetID) return message.reply(createFlatDisplay("Error", ["You can't send money to yourself."]));
 
-				// Check if sender has enough money to send
-				if (senderData.money < amount) return message.reply(getLang("notEnoughMoney"));
+      const [sender, receiver] = await Promise.all([
+        usersData.get(senderID),
+        usersData.get(targetID)
+      ]);
 
-				// Deduct money from sender and add to recipient
-				senderData.money -= amount;
-				recipientData.money += amount;
+      if (sender.money < amount) {
+        return message.reply(createFlatDisplay("Insufficient Balance", [
+          `You need ${formatMoney(amount - sender.money)} more.`
+        ]));
+      }
 
-				await usersData.set(event.senderID, senderData);
-				await usersData.set(uid, recipientData);
+      await Promise.all([
+        usersData.set(senderID, { money: sender.money - amount }),
+        usersData.set(targetID, { money: receiver.money + amount })
+      ]);
 
-				return message.reply(getLang("addedMoneyTo", amount, event.mentions[uid].replace("@", ""), senderData.money));
-			}
+      const receiverName = await usersData.getName(targetID);
+      return message.reply(createFlatDisplay("Transfer Complete", [
+        `To: ${receiverName}`,
+        `Sent: ${formatMoney(amount)}`,
+        `Your New Balance: ${formatMoney(sender.money - amount)}`
+      ]));
+    }
 
-			// If no user is mentioned, add money to sender's account
-			senderData.money += amount;
-			await usersData.set(event.senderID, senderData);
-			return message.reply(getLang("addedMoney", amount, senderData.money));
-		}
+    if (messageReply?.senderID && !args[0]) {
+      const targetID = messageReply.senderID;
+      const name = await usersData.getName(targetID);
+      const money = await usersData.get(targetID, "money");
+      return message.reply(createFlatDisplay(`${name}'s Balance`, [
+        `💰 Balance: ${formatMoney(money)}`
+      ]));
+    }
 
-		if (Object.keys(event.mentions).length > 0) {
-			const uids = Object.keys(event.mentions);
-			let msg = "";
-			for (const uid of uids) {
-				const userMoney = await usersData.get(uid, "money");
-				msg += getLang("moneyOf", event.mentions[uid].replace("@", ""), userMoney) + '\n';
-			}
-			return message.reply(msg);
-		}
+    if (Object.keys(mentions).length > 0) {
+      const balances = await Promise.all(
+        Object.entries(mentions).map(async ([uid, name]) => {
+          const money = await usersData.get(uid, "money");
+          return `${name.replace('@', '')}: ${formatMoney(money)}`;
+        })
+      );
+      return message.reply(createFlatDisplay("User Balances", balances));
+    }
 
-		const userData = await usersData.get(event.senderID);
-		message.reply(getLang("money", userData.money));
-	}
+    const userMoney = await usersData.get(senderID, "money");
+    return message.reply(createFlatDisplay("Your Balance", [
+      `💵 ${formatMoney(userMoney)}`,
+    ]));
+  }
 };
