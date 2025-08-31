@@ -90,7 +90,7 @@ module.exports = {
       }
     } catch (e) {
       api.setMessageReaction("❎", event.messageID, () => {}, true);
-      api.sendMessage("𝖲𝗈𝗋𝗋𝗒 𝖩𝖺𝗇 𝖠𝖯𝖨 𝖯𝗋𝗈𝖻𝗅𝖾𝗆", event.threadID, event.messageID);
+      api.sendMessage("𝕊𝕆ℝℝ𝕐 𝕁𝔸ℕ 𝔸ℙ𝕀 ℙℝ𝕆𝔹𝕃𝔼𝕄 💔", event.threadID, event.messageID);
     }
   },
 };
