@@ -201,7 +201,7 @@ const fontMaps = [
 
 module.exports = {
   config: {
-    name: 'font',
+    name: "font1",
     version: '1.0',
     author: 'MR.AYAN',
     countDown: 0,
