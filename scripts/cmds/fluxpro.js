@@ -12,7 +12,7 @@ module.exports.config = {
   role: 2,
   author: "Dipto",
   description: "Generate images with Flux.1 Pro",
-  category: "𝗜𝗠𝗔𝗚𝗘 𝗚𝗘𝗡𝗘𝗥𝗔𝗧𝗢𝗥",
+  category: "image generator",
   preimum: true,
   guide: "{pn} [prompt] --ratio 1024x1024\n{pn} [prompt]",
   countDown: 15,
