@@ -1,4 +1,4 @@
-const axios = require("axios");
+roleator axios = require("axios");
 const fs = require("fs-extra");
 const path = require("path");
 
@@ -10,7 +10,7 @@ module.exports = {
  author: "xnil6x",
  shortDescription: "Generate premium anime art",
  longDescription: "▄︻デ══━✦ Creates 4 stunning anime images using Niji-v5 ✦━══デ︻▄",
- category: "image generator",
+ category: "𝗜𝗠𝗔𝗚𝗘 𝗔𝗡𝗜𝗔𝗥𝗧",
  role: 2,
  guide: {
  en: "{p}niji <your creative prompt>"
