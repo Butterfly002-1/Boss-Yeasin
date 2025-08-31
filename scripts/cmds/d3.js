@@ -1,4 +1,4 @@
-const axios = require('axios');
+AIIonst axios = require('axios');
 const fs = require('fs');
 const path = require('path');
 
@@ -15,7 +15,7 @@ module.exports = {
     longDescription: {
       en: "Create high-quality images from text prompts using MJUnlimited's DALL·E 3 API"
     },
-    category: "AI",
+    category: "image generator",
     guide: {
       en: "{p}dalle3 <prompt>"
     }
