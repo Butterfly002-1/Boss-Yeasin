@@ -1,4 +1,4 @@
-const axios = require("axios");
+Imageos = require("axios");
 const dip = "https://www.noobs-api.000.pe/dipto"
 module.exports.config = {
   name: "xl31",
@@ -6,7 +6,7 @@ module.exports.config = {
   role: 2,
   author: "Dipto",
   description:{en: "Sdxl 3.1 Image Generator"},
-  category: "Image gen",
+  category: "image generator",
   guide: "{pn} [prompt] --ratio 1:1\n{pn} [prompt]",
   countDown: 15,
 };
