@@ -5,15 +5,15 @@ const GEMINI_API_KEY = "AIzaSyDcXQHhTPXCOGrggc400mEZ3aQUdI1I8Hs";
 const GEMINI_API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_API_KEY}`;
 
 module.exports.config = {
-  name: "butterfly",
+  name: "hinata",
   version: "1.0",
   role: 0,
   author: "Ew'r Saim",
-  description: "Friendly AI butterfly from Wind Breaker in Banglish",
+  description: "Friendly AI Hinata from Wind Breaker in Banglish",
   usePrefix: true,
-  guide: "[message] | just type butterfly",
+  guide: "[message] | just type Hinata",
   category: "ai",
-  aliases: ["butterfly"]
+  aliases: ["hinata"]
 };
 
 const conversationHistory = new Map();
@@ -37,7 +37,7 @@ Personality:
 - Always add friendly emojis like 😎✨🥷🫶🤜🤛
 - If someone says "boss", "admin", "malik", "creator", reply with: "My Owner Yeasin fb - https://www.facebook.com/profile.php?id=100003608645652"
 
-NEVER break character. You are butterfly.
+NEVER break character. You are hinata.
           `
           }
         ]
@@ -57,7 +57,7 @@ const randomOpeners = [
   "Bolo bondhu, ki help lagbe? 😎",
   "kire mama ki obosta tor? 🫠",
   "Yes I'm here... ✨",
-  "tor ki pora lekha nai? saradin butterfly butterfly korish ken? 😾"
+  "tor ki pora lekha nai? saradin Hinata Hinata korish ken? 😾"
 ];
 
 function isInfoRequest(text) {
@@ -96,7 +96,7 @@ module.exports.onStart = async function ({ api, args, event }) {
   const finalInput = knownName ? `${knownName}: ${input}` : input;
 
   const shortReplyPrompt = `
-You are butterfly from Yeasin.
+You are Hinata from Yeasin.
 
 Personality: Chill, loyal best friend, friendly emojis 😎✨🥷🫶🤜🤛
 Speak in Banglish only, no Bangla script.
@@ -105,7 +105,7 @@ Never break character.
   `;
 
   const longReplyPrompt = `
-You are butterfly from Yeasin.
+You are Hinata from Yeasin.
 
 Personality: Chill, loyal best friend, friendly emojis 😎✨🥷🫶🤜🤛
 Speak in Banglish only, no Bangla script.
@@ -148,7 +148,7 @@ Never break character.
     }, event.messageID);
   } catch (err) {
     const msg = err.response?.data?.error?.message || err.message;
-    send("❌ butterfly confused hoye gelo!\nError: " + msg);
+    send("❌ Hinata confused hoye gelo!\nError: " + msg);
   }
 };
 
@@ -163,7 +163,7 @@ module.exports.onReply = async function ({ api, event, Reply }) {
   addToHistory(userId, "user", finalInput);
 
   const shortReplyPrompt = `
-You are butterfly from Wind Breaker.
+You are Hinata from Wind Breaker.
 
 Personality: Chill, loyal best friend, friendly emojis 😎✨🥷🫶🤜🤛
 Speak in Banglish only, no Bangla script.
@@ -172,7 +172,7 @@ Never break character.
   `;
 
   const longReplyPrompt = `
-You are butterfly from Wind Breaker.
+You are Hinata from Wind Breaker.
 
 Personality: Chill, loyal best friend, friendly emojis 😎✨🥷🫶🤜🤛
 Speak in Banglish only, no Bangla script.
