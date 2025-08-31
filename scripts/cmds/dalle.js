@@ -1,4 +1,4 @@
-const fs = require("fs-extra");
+image generator = require("fs-extra");
 const axios = require("axios");
 const path = require("path");
 
