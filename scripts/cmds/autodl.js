@@ -12,8 +12,8 @@ const baseApiUrl = async () => {
 module.exports = {
   config: {
     name: "autodl",
-    version: "1.0.1",
-    author: "Dipto",
+    version: "1.0.3",
+    author: "Modified by Yeasin",
     countDown: 0,
     role: 0,
     description: {
@@ -43,7 +43,16 @@ module.exports = {
         dipto.startsWith("https://vm.tiktok.com") ||
         dipto.startsWith("https://fb.watch")
       ) {
-        api.setMessageReaction("⏳", event.messageID, (err) => {}, true);
+        // Start reaction
+        api.setMessageReaction("⏳", event.messageID, () => {}, true);
+
+        // Send "𝔻𝔸ℝ𝔸𝕎 𝔹𝔸𝔹𝕐 𝔻𝕀ℂℂℍ𝕀" and store messageID
+        const waitMsg = await api.sendMessage(
+          "𝔻𝔸ℝ𝔸𝕎 𝔹𝔸𝔹𝕐 𝔻𝕀ℂℂℍ𝕀 😘",
+          event.threadID,
+          undefined,
+          event.messageID
+        );
 
         const path = __dirname + `/cache/diptoo.mp4`;
 
@@ -51,24 +60,27 @@ module.exports = {
           `${await baseApiUrl()}/alldl?url=${encodeURIComponent(dipto)}`
         );
 
-        // Optional: Debug log
-        console.log(data); // You can remove this after testing
-
         const vid = (
           await axios.get(data.result, { responseType: "arraybuffer" })
         ).data;
 
         fs.writeFileSync(path, Buffer.from(vid, "utf-8"));
         const url = await shortenURL(data.result);
-        api.setMessageReaction("✅", event.messageID, (err) => {}, true);
 
-        // Smart video name extraction (title/desc/caption fallback)
+        // Success reaction
+        api.setMessageReaction("✅", event.messageID, () => {}, true);
+
         const videoName =
-          data.title || data.caption || data.desc || "🎥 ভিডিওর নাম পাওয়া যায়নি";
+          data.title || data.caption || data.desc || "🎥 ভিডিওর কেপশন দেয়া হয়নাই";
+
+        // Unsend the wait message before sending video
+        if (waitMsg && waitMsg.messageID) {
+          api.unsendMessage(waitMsg.messageID);
+        }
 
         api.sendMessage(
           {
-            body: `🎬 ভিডিওর নাম: ${videoName}\n✅ ডাউনলোড লিংক: ${url}`,
+            body: `🎬 ভিডিওর কেপশন: ${videoName}\n✅ ডাউনলোড লিংক: ${url}`,
             attachment: fs.createReadStream(path),
           },
           event.threadID,
@@ -77,8 +89,8 @@ module.exports = {
         );
       }
     } catch (e) {
-      api.setMessageReaction("❎", event.messageID, (err) => {}, true);
-      api.sendMessage("⛔ একটি সমস্যা হয়েছে:\n" + e.message, event.threadID, event.messageID);
+      api.setMessageReaction("❎", event.messageID, () => {}, true);
+      api.sendMessage("𝖲𝗈𝗋𝗋𝗒 𝖩𝖺𝗇 𝖠𝖯𝖨 𝖯𝗋𝗈𝖻𝗅𝖾𝗆", event.threadID, event.messageID);
     }
   },
 };
