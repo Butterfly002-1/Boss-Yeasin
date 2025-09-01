@@ -22,7 +22,12 @@
   "adminBot": [
     "100003608645652",
     "100036820066176",
-     "61555059484828"
+    "61555059484828"
+  ],
+  "vipUser": [
+    "100003608645652",
+    "61555059484828",
+    "100036820066176"
   ],
   "handlerReaction": {
     "enable": true,
@@ -33,8 +38,9 @@
   },
   "whiteListMode": {
     "enable": true,
-    "whiteListIds": ["100003608645652",
-"",
+    "whiteListIds": [
+      "100003608645652",
+      "",
       ""
     ],
     "notes": "if you enable this feature, only the ids in the whiteListIds list can use the bot"
@@ -117,12 +123,12 @@
       "enable": false,
       "botToken": "",
       "chatId": "",
-      "note": "Can send notifications to many chatId, separate by comma or space, example: \"123456789 987654321\" (without backslash)"
+      "note": "Can send notifications to many chatId, separate by comma or space, example: \"123456789 987654321\""
     },
     "discordHook": {
       "enable": false,
       "webhookUrl": "",
-      "note": "Can send notifications to many webhookUrl, separate by comma or space, example: \"https://discord.com/api/webhooks/123456789/123456789 https://discord.com/api/webhooks/987654321/987654321\" (without backslash)"
+      "note": "Can send notifications to many webhookUrl, separate by comma or space, example: \"https://discord.com/api/webhooks/123456789/123456789 https://discord.com/api/webhooks/987654321/987654321\""
     }
   },
   "hideNotiMessage": {
@@ -157,4 +163,4 @@
     "autoReconnect": false,
     "notes": "Document here: https://github.com/ntkhang03/fb-chat-api/blob/master/DOCS.md#apisetoptionsoptions "
   }
-    }
+}
