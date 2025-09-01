@@ -5,7 +5,7 @@ module.exports = {
   config: {
     name: "join",
     version: "2.0",
-    author: "...",//** original author MR.RAFI this you fb I'd : https://www.facebook.com/profile.php?id=61560170243143 **//
+    author: "HI NA TA",//** original author MR.RAFI this you fb I'd : https://www.facebook.com/profile.php?id=61560170243143 **//
     countDown: 5,
     role: 2,
     shortDescription: "Join the group that bot is in",
