@@ -1,43 +1,62 @@
 const axios = require("axios");
+const apiUrl = "https://apis-top.vercel.app/aryan/font";
 
-const mahmud = async () => {
-  const base = await axios.get("https://raw.githubusercontent.com/mahmudx7/exe/main/baseApiUrl.json");
-  return base.data.mahmud;
-};
+const nix = {
+  nix: {
+    name: "font",
+    aliases: ["ft"],
+    version: "0.0.1",
+    author: "ArYAN",
+    cooldowns: 5,
+    role: 0,
+    category: "tools",
+    shortDescription: "Stylish text generator",
+    longDescription: "Generate stylish text with different font styles.",
+    guide: "Use: {p}font list\n{p}font <number> <text>",
+    prefix: false,
+  },
 
-module.exports.config = {
-  name: "style",
-  aliases: ["font"],
-  version: "1.7",
-  role: 0,
-  countDowns: 5,
-  author: "MahMUD",
-  category: "general",
-  guide: { en: "[number] [text] or list" }
-};
+  onStart: async function ({ bot, message, args, chatId, msg }) {
+    if (!args[0]) {
+      return message.reply("❌ | Please provide arguments.\nUse:\nfont list\nfont <number> <text>");
+    }
 
-module.exports.onStart = async function ({ message, args }) {
-  const apiUrl = await mahmud();
-
-  if (args[0] === "list") {
+    let styles = [];
     try {
-      const fontList = (await axios.get(`${apiUrl}/api/font/list`)).data.replace("Available Font Styles:", "").trim();
-      return fontList ? message.reply(`Available Font Styles:\n${fontList}`) : message.reply("No font styles found.");
+      const r = await axios.get(apiUrl);
+      styles = r.data.available_styles || [];
     } catch {
-      return message.reply("Error fetching font styles.");
+      return message.reply("❌ | Failed to fetch font styles from API.");
+    }
+
+    if (args[0].toLowerCase() === "list") {
+      let msg = "📜 | Available Font Styles:\n\n";
+      styles.forEach((style, i) => {
+        msg += `${i + 1}. ${style}\n`;
+      });
+      const sentMessage = await bot.sendMessage(chatId, msg, { reply_to_message_id: msg.message_id });
+      setTimeout(() => bot.deleteMessage(chatId, sentMessage.message_id), 15000);
+      return;
+    }
+
+    const index = parseInt(args[0]);
+    if (isNaN(index) || index < 1 || index > styles.length) {
+      return message.reply("❌ | Invalid style number.\nType: font list");
+    }
+
+    const style = styles[index - 1];
+    const text = args.slice(1).join(" ");
+    if (!text) return message.reply("❌ | Please provide text to style.");
+
+    try {
+      const url = `${apiUrl}?style=${style}&text=${encodeURIComponent(text)}`;
+      const r = await axios.get(url);
+      const styledText = r.data.result || "❌ API error.";
+      return message.reply(styledText);
+    } catch {
+      return message.reply("❌ | Failed to fetch styled text.");
     }
   }
-
-  const [number, ...textParts] = args;
-  const text = textParts.join(" ");
-  if (!text || isNaN(number)) return message.reply("Invalid usage. Format: style <number> <text>");
-
-  try {
-    const { data: { data: fontData } } = await axios.post(`${apiUrl}/api/font`, { number, text });
-    const fontStyle = fontData[number];
-    const convertedText = text.split("").map(char => fontStyle[char] || char).join("");
-    return message.reply(convertedText);
-  } catch {
-    return message.reply("Error processing your request.");
-  }
 };
+
+module.exports = nix;
