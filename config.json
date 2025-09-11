@@ -20,20 +20,20 @@
     "ignoreCommand": []
   },
   "adminBot": [
-    "100003608645652",
+    "100000474035409",
     "100036820066176",
     "100047588199979"
   ],
   "handlerReaction": {
     "enable": true,
     "HandelReactionMain": [
-      "100003608645652"
+      "100000474035409"
     ],
     "HandelReactionOthers": []
   },
   "whiteListMode": {
     "enable": true,
-    "whiteListIds": ["100003608645652",
+    "whiteListIds": ["100000474035409",
 "",
       ""
     ],
