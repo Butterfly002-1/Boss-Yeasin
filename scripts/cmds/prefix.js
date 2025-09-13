@@ -89,7 +89,7 @@ module.exports = {
 			const [datePart, timePart] = dateTime.split(", ");
 
 			const infoBox = `
-╔════ 𝖧𝖨 𝖭𝖠 𝖳𝖠 🎀 ════╗
+╔════ 𝖧𝖠 𝖡𝖨 𝖡𝖠 🎀 ════╗
 🌐 System Prefix  : ${systemPrefix.padEnd(10)}
 💬 Group Prefix   : ${groupPrefix.padEnd(10)} 
 🕒 Time           : ${timePart.padEnd(10)} 
